@@ -1,4 +1,4 @@
-package com.hotel.hbh;
+package com.hotel.hbh.ui.chambers;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,13 +9,16 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hotel.hbh.R;
+import com.hotel.hbh.ui.Reserver;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class chambre_single extends AppCompatActivity {
+public class SuiteJuniorSingle extends AppCompatActivity {
 
     ImageView imageView;
-    int[] images = {R.drawable.img_6,R.drawable.img_5,R.drawable.img_4};
+    int[] images = {R.drawable.img_13, R.drawable.img_7,R.drawable.img_9,R.drawable.img_10, R.drawable.img_8,R.drawable.img_12};
     int currentIndex = 0;
     Handler handler = new Handler();
     Timer timer = new Timer();
@@ -24,7 +27,7 @@ public class chambre_single extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chambre_single);
+        setContentView(R.layout.activity_suite_junior_single);
 
         imageView = findViewById(R.id.imageView5);
 
@@ -51,10 +54,8 @@ public class chambre_single extends AppCompatActivity {
         timer.cancel();
     }
 
-    public void openActivity(View view){
-        Intent openActivity = new Intent(this,reserver.class);
+    public void openActivity9(View view){
+        Intent openActivity = new Intent(this, Reserver.class);
         startActivity(openActivity);
     }
 }
-
-

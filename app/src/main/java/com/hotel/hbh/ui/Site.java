@@ -1,4 +1,4 @@
-package com.hotel.hbh;
+package com.hotel.hbh.ui;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class site extends AppCompatActivity {
+import com.hotel.hbh.R;
+
+public class Site extends AppCompatActivity {
     WebView webView;
     TextView text;
     @Override

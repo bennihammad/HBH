@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".chambre_double">
+    tools:context=".ui.chambers.ChambreDouble">
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"

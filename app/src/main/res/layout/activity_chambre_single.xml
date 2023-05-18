@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#34FFEEB3"
-    tools:context=".chambre_single">
+    tools:context=".ui.chambers.ChambreSingle">
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"

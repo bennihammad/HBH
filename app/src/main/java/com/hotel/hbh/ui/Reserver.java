@@ -1,4 +1,4 @@
-package com.hotel.hbh;
+package com.hotel.hbh.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,13 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.hotel.hbh.R;
+import com.hotel.hbh.data.User;
+import com.hotel.hbh.helpers.auth.AuthenticationHelper;
+import com.hotel.hbh.helpers.auth.RegisterUserOptions;
 
-public class reserver extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
 
-    private DatabaseReference mDatabase;
-    private EditText editText1,editText2,editText3,editText4,editText5,editText6,editText7;
+
+public class Reserver extends AppCompatActivity {
+    private EditText editText1, editText2, editText3, editText4, editText5, editText6, editText7;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +33,13 @@ public class reserver extends AppCompatActivity {
         editText6 = findViewById(R.id.chambre);
         editText7 = findViewById(R.id.n_chambre);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
 
     public void sendData(View view) {
         writeNewUser();
     }
+
     public void writeNewUser() {
         User user = new User(editText1.getText().toString(),
                 editText2.getText().toString(),
@@ -43,7 +50,15 @@ public class reserver extends AppCompatActivity {
                 editText7.getText().toString()
         );
 
-        mDatabase.child("users").child(user.getNom_et_prénom()).setValue(user);
+
+        RegisterUserOptions options = new RegisterUserOptions(
+                user.getNom_et_prénom(), user.getEmail(),
+                user.getNuméro_de_téléphone(), user.getChambre(),
+                user.getNombre_de_chambre(),
+                user.getDate_darrivéé(), user.getDate_de_départ());
+
+        AuthenticationHelper.getInstance().registerUser(options);
+
 
     }
 }

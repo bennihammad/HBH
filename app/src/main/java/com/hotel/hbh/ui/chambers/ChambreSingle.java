@@ -1,32 +1,52 @@
-package com.hotel.hbh;
+package com.hotel.hbh.ui.chambers;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hotel.hbh.R;
+import com.hotel.hbh.helpers.reservation.ReserveChambreOptions;
+import com.hotel.hbh.ui.Reserver;
+import com.hotel.hbh.helpers.reservation.ReservationHelper;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class suite_senior_double extends AppCompatActivity {
+public class ChambreSingle extends AppCompatActivity {
 
     ImageView imageView;
-    int[] images = {R.drawable.img_13, R.drawable.img_7,R.drawable.img_9,R.drawable.img_10, R.drawable.img_8,R.drawable.img_12};
+    int[] images = {R.drawable.img_6,R.drawable.img_5,R.drawable.img_4};
     int currentIndex = 0;
     Handler handler = new Handler();
     Timer timer = new Timer();
+    Button reserveBtn;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_suite_senior_double);
+        setContentView(R.layout.activity_chambre_single);
 
         imageView = findViewById(R.id.imageView5);
+        reserveBtn = findViewById(R.id.button9);
+
+        reserveBtn.setOnClickListener(
+                v -> {
+                    ReserveChambreOptions options = new ReserveChambreOptions(
+                            "5",
+                            "test",
+                            "idir",
+                            "34"
+                    );
+                    ReservationHelper.getInstance().reserveChambre(options);
+                }
+        );
 
         // Schedule a timer task to change the image every 3 seconds
         timer.schedule(new TimerTask() {
@@ -51,8 +71,10 @@ public class suite_senior_double extends AppCompatActivity {
         timer.cancel();
     }
 
-    public void openActivity10(View view){
-        Intent openActivity = new Intent(this,reserver.class);
+    public void openActivity(View view){
+        Intent openActivity = new Intent(this, Reserver.class);
         startActivity(openActivity);
     }
 }
+
+

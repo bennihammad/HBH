@@ -14,42 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HBH">
         <activity
-            android:name=".DetailActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".site"
-            android:exported="true"></activity>
-        <activity
-            android:name=".choisir"
-            android:exported="true"></activity>
-        <activity
-            android:name=".chambre_double"
-            android:exported="true"></activity>
-        <activity
-            android:name=".chambre_single"
-            android:exported="true"></activity>
-        <activity
-            android:name=".suite_junior_double"
-            android:exported="true"></activity>
-        <activity
-            android:name=".suite_junior_single"
-            android:exported="true"></activity>
-        <activity
-            android:name=".suite_senior_double"
-            android:exported="true"></activity>
-        <activity
-            android:name=".suite_senior_single"
-            android:exported="true"></activity>
-        <activity
-            android:name=".reserver"
-            android:exported="true"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".ui.login.LoginActivity"
+            android:exported="true"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,7 +27,44 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
         </activity>
+
+        <activity
+            android:name=".ui.DetailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.Site"
+            android:exported="true" />
+        <activity
+            android:name=".ui.customer.ChambersHome"
+            android:exported="true" />
+        <activity
+            android:name=".ui.chambers.ChambreDouble"
+            android:exported="true" />
+        <activity
+            android:name=".ui.chambers.ChambreSingle"
+            android:exported="true" />
+        <activity
+            android:name=".ui.chambers.SuitJuniorDouble"
+            android:exported="true" />
+        <activity
+            android:name=".ui.chambers.SuiteJuniorSingle"
+            android:exported="true" />
+        <activity
+            android:name=".ui.chambers.SuiteSeniorDouble"
+            android:exported="true" />
+        <activity
+            android:name=".ui.chambers.SuiteSeniorSingle"
+            android:exported="true" />
+        <activity
+            android:name=".ui.Reserver"
+            android:exported="true" />
+        <activity android:name=".ui.customer.UserApp" android:exported="true"/>
     </application>
 
 </manifest>

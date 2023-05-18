@@ -1,4 +1,4 @@
-package com.hotel.hbh;
+package com.hotel.hbh.ui.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hotel.hbh.R;
+import com.hotel.hbh.ui.Site;
+import com.hotel.hbh.data.Chambre;
+
 import java.util.ArrayList;
 
-public class choisir extends AppCompatActivity {
+public class ChambersHome extends AppCompatActivity {
     private RecyclerView.Adapter adapterchambre, adaptersuite;
     private RecyclerView recyclerViewchambre, recyclerViewsuite;
 
@@ -23,32 +27,32 @@ public class choisir extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        ArrayList<itemsDomain> ItemsArraylist = new ArrayList<>();
+        ArrayList<Chambre> ItemsArraylist = new ArrayList<>();
 
-        ItemsArraylist.add(new itemsDomain("chambre single", "BBA", "2bad", 2, 1, 9600, R.drawable.img_6, true));
-        ItemsArraylist.add(new itemsDomain("chambre double", "BBA", "2bad", 2, 1, 134000, R.drawable.img_3, true));
+        ItemsArraylist.add(new Chambre("chambre single", "BBA", "2bad", 2, 1, 9600, R.drawable.img_6, true));
+        ItemsArraylist.add(new Chambre("chambre double", "BBA", "2bad", 2, 1, 134000, R.drawable.img_3, true));
 
         recyclerViewchambre = findViewById(R.id.viewchambres);
         recyclerViewchambre.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapterchambre = new ItemsAdapter(ItemsArraylist);
+        adapterchambre = new ChambreAdapter(ItemsArraylist);
         recyclerViewchambre.setAdapter(adapterchambre);
 
 
-        ArrayList<itemsDomain> ItemsArraylist2 = new ArrayList<>();
+        ArrayList<Chambre> ItemsArraylist2 = new ArrayList<>();
 
-        ItemsArraylist2.add(new itemsDomain("suite junior single", "BBA", "2bad", 2, 1, 13900,R.drawable.img_13, true));
-        ItemsArraylist2.add(new itemsDomain("suite junior double ", "BBA", "2bad", 2, 1, 17400, R.drawable.img_13, true));
-        ItemsArraylist2.add(new itemsDomain("suite senior single", "BBA", "2bad", 2, 1, 17000, R.drawable.img_13, true));
-        ItemsArraylist2.add(new itemsDomain("suite senior double", "BBA", "2bad", 2, 1, 20800,R.drawable.img_13 , true));
+        ItemsArraylist2.add(new Chambre("suite junior single", "BBA", "2bad", 2, 1, 13900,R.drawable.img_13, true));
+        ItemsArraylist2.add(new Chambre("suite junior double ", "BBA", "2bad", 2, 1, 17400, R.drawable.img_13, true));
+        ItemsArraylist2.add(new Chambre("suite senior single", "BBA", "2bad", 2, 1, 17000, R.drawable.img_13, true));
+        ItemsArraylist2.add(new Chambre("suite senior double", "BBA", "2bad", 2, 1, 20800,R.drawable.img_13 , true));
 
 
         recyclerViewsuite = findViewById(R.id.viewsuites);
         recyclerViewsuite.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adaptersuite = new ItemsAdapter(ItemsArraylist2);
+        adaptersuite = new ChambreAdapter(ItemsArraylist2);
         recyclerViewsuite.setAdapter(adaptersuite);
     }
     public void openActivity1(View view){
-        Intent openActivity = new Intent(this,site.class);
+        Intent openActivity = new Intent(this, Site.class);
         startActivity(openActivity);
     }
 

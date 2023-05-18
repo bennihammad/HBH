@@ -8,7 +8,7 @@
     android:focusable="true"
     android:background="#1E408E91"
     android:focusableInTouchMode="true"
-    tools:context=".choisir">
+    tools:context=".ui.customer.ChambersHome">
 
     <ScrollView
         android:layout_width="match_parent"
