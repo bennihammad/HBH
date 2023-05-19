@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hotel.hbh.ui.customer.UserApp;
@@ -16,26 +17,50 @@ public class AuthenticationHelper {
     private static AuthenticationHelper instance;
 
     private final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
 
-    private AuthenticationHelper(){}
+    private AuthenticationHelper() {
+    }
 
-    public void loginWithUsernameAndPassword(Context context, LoginOptions options) {
-        if (options.username.equals("customer") && options.password.equals("customer")) {
-            redirectToUserInterface(context);
+    public void loginWithEmailAndPassword(Context context, LoginOptions options) {
 
-            return;
+        firebaseAuth.signInWithEmailAndPassword(options.email, options.password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        } else if (options.username.equals("admin") && options.password.equals("admin")) {
-            redirectToAdminInterface(context);
-            return;
-        }
+                        if (user != null) {
+                            String userId = user.getUid();
+                            firestore.collection("users").document(userId).get().addOnSuccessListener(r -> {
+                                String role = (String) r.get("role");
 
-        Toast.makeText(context, "wrong password or username", Toast.LENGTH_SHORT).show();
+                                assert role != null;
+
+                                if (role.equals(UserRoles.customer.name())) {
+                                    redirectToUserInterface(context);
+                                } else {
+                                    redirectToAdminInterface(context);
+                                }
+                            });
+
+                            return;
+
+                        }
+                        Toast.makeText(context, "user doesn't exist", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Exception exception = task.getException();
+                        assert exception != null;
+                        Toast.makeText(context, exception.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
 
     }
 
-    public void registerUser(RegisterUserOptions options){
+    public void registerUser(RegisterUserOptions options) {
         CollectionReference collection = firestore.collection("users");
 
         Map<String, Object> data = new HashMap<>();
@@ -77,4 +102,20 @@ public class AuthenticationHelper {
         return instance;
     }
 
+    public String getDisplayName() {
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        assert user != null;
+        final boolean validDisplayName = (user.getDisplayName() != null) && (!user.getDisplayName().isEmpty());
+
+        return validDisplayName ? user.getDisplayName() : user.getEmail();
+
+    }
+
+    public String getUserId() {
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+        assert user != null;
+
+        return user.getUid();
+    }
 }

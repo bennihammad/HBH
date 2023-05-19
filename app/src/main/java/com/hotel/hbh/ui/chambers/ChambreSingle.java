@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hotel.hbh.R;
+import com.hotel.hbh.helpers.auth.AuthenticationHelper;
 import com.hotel.hbh.helpers.reservation.ReserveChambreOptions;
 import com.hotel.hbh.ui.Reserver;
 import com.hotel.hbh.helpers.reservation.ReservationHelper;
@@ -38,11 +39,13 @@ public class ChambreSingle extends AppCompatActivity {
 
         reserveBtn.setOnClickListener(
                 v -> {
+                    AuthenticationHelper auth = AuthenticationHelper.getInstance();
+
                     ReserveChambreOptions options = new ReserveChambreOptions(
                             "5",
                             "test",
-                            "idir",
-                            "34"
+                            auth.getDisplayName(),
+                            auth.getUserId()
                     );
                     ReservationHelper.getInstance().reserveChambre(options);
                 }
